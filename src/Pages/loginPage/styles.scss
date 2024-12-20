@@ -1,0 +1,22 @@
+.login_page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .login_form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+
+    .login_buttons {
+      display: flex;
+      gap: 20px;
+      align-items: end;
+    }
+  }
+
+  .error_message {
+    color: red;
+  }
+}
