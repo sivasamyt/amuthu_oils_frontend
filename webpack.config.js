@@ -6,7 +6,7 @@ module.exports = {
   // ... other configuration options ...
 
   resolve: {
-    fallback: {
+    alias: {
       util: require.resolve('util/'),
       crypto: require.resolve('crypto-browserify'),
       stream: require.resolve('stream-browserify'),
@@ -14,6 +14,6 @@ module.exports = {
     },
   },
 
-  // Add this line to exclude crypto module
+  // Exclude crypto module
   externals: [nodeExternals({ allowlist: ['util'] })],
 };

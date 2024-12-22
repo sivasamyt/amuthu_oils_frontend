@@ -11,6 +11,7 @@
 
     .container {
       transition: transform 0.2s ease-in-out;
+      height: fit-content;
 
       &:hover {
         transform: translateY(-10px);

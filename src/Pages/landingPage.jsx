@@ -16,16 +16,12 @@ function LandingPage() {
   const nav = useNavigate();
   const user=useStore(state=>state.user);
   const productsData = async () => {
-    // console.log('entry');
     const products = await productsList();
-    // console.log('entry-2');
     setProductList(products?.data);
-    // console.log('entry-3');
   };
 
   const singleProduct = async (id) => {
     const product = await productsList(id);
-    // console.log(product);
     setSingleProductView(true);
     setProduct(product?.data);
     setBasePrice(product?.data?.price)
@@ -46,7 +42,7 @@ function LandingPage() {
   };
   const handleAddToCart = async() => {
     if(!user){
-      nav("/login");
+      nav("/login", { state:{ message: "User login first", type: "warning" }});
     }else{
       const cartItem = {
         userId : user.id,
@@ -54,9 +50,7 @@ function LandingPage() {
         quantity: nos,
       };
       const cartItemMessage = await addCartItems(cartItem);
-      // console.log('cartItemMessage-----',cartItemMessage);
       if (cartItemMessage?.success) {
-        // console.log("Item added to cart successfully:", cartItemMessage);
         closePopup();
       } else {
         console.error("Failed to add item to cart:", cartItemMessage?.message || "Unknown error");

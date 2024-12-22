@@ -11,6 +11,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import "./styles.scss";
 import { login } from "../../Api/api";
 import useStore from "../../zustand/store";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const { register, handleSubmit } = useForm();
@@ -18,6 +19,22 @@ const LoginPage = () => {
   const addUser = useStore((state) => state.addUser);
   const setAdmin = useStore((state) => state.isAdmin);
   const [errorMessage, setErrorMessage] = useState("");
+  const location = useLocation();
+  const messageState = location.state;
+
+  useEffect(() => {
+    if (messageState) {
+      const { message, type } = messageState;
+      if (type === "success") {
+        toast.success(message);
+      } else if (type === "error") {
+        toast.error(message);
+      } else if (type === "warning") {
+        toast.warning(message);
+      }
+      navigate("/login", { replace: true }); 
+    }
+  }, [messageState, navigate]);
 
   const apiCheck = async (data) => {
     try {

@@ -1,4 +1,5 @@
 import "./App.css";
+import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import LandingPage from "./Pages/landingPage";
 import Header from "./components/header";
@@ -10,11 +11,14 @@ import TestPage from "./testPage";
 import OrdersPage from "./Pages/ordersPage";
 import SingleProductPage from "./Pages/singleProduct";
 import CartPage from "./Pages/cartPage";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className="App">
     {<Header/>}
+    {<ToastContainer />}
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<LoginPage />} />

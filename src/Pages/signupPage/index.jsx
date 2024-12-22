@@ -10,6 +10,8 @@ import TextField from "@mui/material/TextField";
 import "./styles.scss";
 import StyleButton from "../../components/styleButton";
 import { userSignup } from "../../Api/api";
+import { toast } from "react-toastify";
+
 
 const SignupPage = () => {
   const [submit, setSubmit] = useState(false);
@@ -20,8 +22,13 @@ const SignupPage = () => {
 
   const onSubmit = async (data) => {
     if(submit){
-     await userSignup(data);
-      nav("/login", { state: "Signed Up Successfully" })
+     const response = await userSignup(data);
+      if(response.success){
+        // console.log('response of signup page',response.message);
+        nav("/login", { state:{ message: response.message, type: "success" }})
+      }else {
+        toast.error("Signup failed. Please try again.");
+      }
     }
   };
   const username = watch("Username", "");
@@ -30,7 +37,6 @@ const SignupPage = () => {
   useEffect(() => {    
     username && email && cpwd && cpwd === pwd ? setSubmit(true) : setSubmit(false);
   }, [username, email, cpwd, pwd]);
-
   return (
     <div className="signup_page">
       <h1>Signup Form</h1>

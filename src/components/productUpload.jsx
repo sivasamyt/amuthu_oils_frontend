@@ -49,6 +49,7 @@ const ProductUpload = () => {
     }
     formData.append("productName", data.ProductName);
     formData.append("Description", data.Description);
+    formData.append("Price", data.Price);
     formData.append("Quantity", data.Quantity);
     formData.append("imageName", data.Image[0].name);
     try {
@@ -85,6 +86,16 @@ const ProductUpload = () => {
             className="form-control"
             type="text"
             {...register("Description")}
+          />
+        </div>
+        <div className="form-group">
+          <TextField
+            required
+            size="small"
+            label="Price"
+            className="form-control"
+            type="text"
+            {...register("Price")}
           />
         </div>
 
